@@ -12,5 +12,8 @@
   "dependencies": {
     "commander": "^7.0.0",
     "local-api": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.7"
   }
 }
