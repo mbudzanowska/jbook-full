@@ -15,10 +15,6 @@ const CellList: React.FC = () => {
     fetchCells();
   }, []);
 
-  // useEffect(() => {
-  //   saveCells();
-  // }, [JSON.stringify(cells)]);
-
   const renderedCells = cells.map((cell) => (
     <Fragment key={cell.id}>
       <CellListItem cell={cell} />
