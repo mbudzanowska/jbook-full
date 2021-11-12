@@ -8,9 +8,6 @@ import {
   InsertCellAfterAction,
   Direction,
   Action,
-  FetchCellsAction,
-  FetchCellsErrorAction,
-  FetchCellsCompleteAction,
 } from "../actions";
 import { Cell, CellTypes } from "../cell";
 import bundle from "../../bundler";
