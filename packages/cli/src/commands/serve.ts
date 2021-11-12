@@ -1,6 +1,6 @@
 import path from "path";
-import { Command, option } from "commander";
-import { serve } from "local-api";
+import { Command } from "commander";
+import { serve } from "@mb-jsnote/local-api";
 
 const isProduction = process.env.NODE_ENV === "production";
 
