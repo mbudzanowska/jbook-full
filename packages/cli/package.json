@@ -17,12 +17,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@mb-jsnote/local-client": "^0.1.0"
+    "@mb-jsnote/local-client": "^1.0.0"
   },
   "devDependencies": {
     "@mb-jsnote/local-api": "^1.0.0",
-    "commander": "^7.0.0",
     "@types/node": "^16.11.7",
+    "commander": "^7.0.0",
     "esbuild": "0.8.26"
   }
 }
