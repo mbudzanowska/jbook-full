@@ -11,6 +11,8 @@ interface Cell {
 export const createCellsRouter = (filename: string, dir: string) => {
   const router = express.Router();
 
+  router.use(express.json());
+
   const fullPath = path.join(dir, filename);
 
   router.get("/cells", async (req, res) => {
@@ -19,6 +21,19 @@ export const createCellsRouter = (filename: string, dir: string) => {
     // read the file
     // parse it
     // send it back to the browser
+
+    try {
+      const result = await fs.readFile(fullPath, { encoding: "utf-8" });
+      res.send(JSON.parse(result));
+    } catch (err: any) {
+      if (err.code === "ENOENT") {
+        // add code to create a file and add default cells
+        await fs.writeFile(fullPath, "[]", "utf-8");
+        res.send([]);
+      } else {
+        throw err;
+      }
+    }
   });
 
   router.post("/cells", async (req, res) => {
