@@ -7,7 +7,7 @@
   ],
   "scripts": {
     "start": "tsc --watch --preserveWatchOutput",
-    "prepublishOnly": "tsc"
+    "prepublishOnly": "esbuild src/index.ts --platform=node --outfile=dist/index.js --bundle --minify --define:proces.env.NODE_ENV=\\\"production\\\""
   },
   "bin": "dist/index.js",
   "publishConfig": {
@@ -17,10 +17,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "commander": "^7.0.0",
-    "@mb-jsnote/local-api": "^1.0.0"
+    "@mb-jsnote/local-client": "^0.1.0"
   },
   "devDependencies": {
-    "@types/node": "^16.11.7"
+    "@mb-jsnote/local-api": "^1.0.0",
+    "commander": "^7.0.0",
+    "@types/node": "^16.11.7",
+    "esbuild": "0.8.26"
   }
 }
