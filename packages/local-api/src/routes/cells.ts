@@ -1,34 +1,28 @@
-import express from "express";
-import fs from "fs/promises";
-import path from "path";
+import express from 'express';
+import fs from 'fs/promises';
+import path from 'path';
 
 interface Cell {
   id: string;
   content: string;
-  type: "text" | "code";
+  type: 'text' | 'code';
 }
 
 export const createCellsRouter = (filename: string, dir: string) => {
   const router = express.Router();
-
   router.use(express.json());
 
   const fullPath = path.join(dir, filename);
 
-  router.get("/cells", async (req, res) => {
-    // make sure the cell storage file exists
-    // if not, add in a default list of cells
-    // read the file
-    // parse it
-    // send it back to the browser
-
+  router.get('/cells', async (req, res) => {
     try {
-      const result = await fs.readFile(fullPath, { encoding: "utf-8" });
+      // Read the file
+      const result = await fs.readFile(fullPath, { encoding: 'utf-8' });
+
       res.send(JSON.parse(result));
-    } catch (err: any) {
-      if (err.code === "ENOENT") {
-        // add code to create a file and add default cells
-        await fs.writeFile(fullPath, "[]", "utf-8");
+    } catch (err) {
+      if (err.code === 'ENOENT') {
+        await fs.writeFile(fullPath, '[]', 'utf-8');
         res.send([]);
       } else {
         throw err;
@@ -36,16 +30,15 @@ export const createCellsRouter = (filename: string, dir: string) => {
     }
   });
 
-  router.post("/cells", async (req, res) => {
-    // make sure the file exists
-    // if not, create it
-    // take the list of cells from the request obj
+  router.post('/cells', async (req, res) => {
+    // Take the list of cells from the request obj
     // serialize them
-
     const { cells }: { cells: Cell[] } = req.body;
-    // write the cells into the file
-    await fs.writeFile(fullPath, JSON.stringify(cells), "utf-8");
-    res.send({ status: "ok" });
+
+    // Write the cells into the file
+    await fs.writeFile(fullPath, JSON.stringify(cells), 'utf-8');
+
+    res.send({ status: 'ok' });
   });
 
   return router;
